@@ -19,19 +19,19 @@ public class LabyJeu implements Jeu {
     @Override
     public void update(double secondes, Clavier clavier) {
         if (clavier.haut){
-            laby.deplacerPerso("HAUT");
+            laby.deplacerPerso("Haut");
         }
 
         if (clavier.bas){
-            laby.deplacerPerso("BAS");
+            laby.deplacerPerso("Bas");
         }
 
         if (clavier.gauche){
-            laby.deplacerPerso("GAUCHE");
+            laby.deplacerPerso("Gauche");
         }
 
         if (clavier.droite){
-            laby.deplacerPerso("DROITE");
+            laby.deplacerPerso("Droite");
         }
     }
 
