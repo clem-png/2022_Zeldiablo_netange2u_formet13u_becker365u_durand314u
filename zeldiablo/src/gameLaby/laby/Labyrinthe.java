@@ -123,6 +123,7 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         //ajout du monstre
                         this.monstre = new Monstre(colonne, numeroLigne);
+                        break;
 
                     default:
                         throw new Error("caractere inconnu " + c);
