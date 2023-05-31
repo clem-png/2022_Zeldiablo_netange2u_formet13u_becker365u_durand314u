@@ -17,6 +17,7 @@ public class Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char VIDE = '.';
+    public static final char MONSTRE = 'M';
 
     /**
      * constantes actions possibles
@@ -30,6 +31,7 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
+    public Monstre monstre;
 
     /**
      * les murs du labyrinthe
@@ -116,6 +118,11 @@ public class Labyrinthe {
                         // ajoute PJ
                         this.pj = new Perso(colonne, numeroLigne);
                         break;
+                    case MONSTRE:
+                        //pas de mur
+                        this.murs[colonne][numeroLigne] = false;
+                        //ajout du monstre
+                        this.monstre = new Monstre(colonne, numeroLigne);
 
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -147,9 +154,11 @@ public class Labyrinthe {
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]) {
+            if (!this.monstre.etrePresent(suivante[0] , suivante[1])){
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+            }
         }
     }
 
