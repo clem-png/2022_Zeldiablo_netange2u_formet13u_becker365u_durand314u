@@ -6,12 +6,10 @@ import javafx.scene.paint.Color;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
-import java.io.IOException;
-
 public class LabyDessin implements DessinJeu {
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
-        LabyJeu laby = new LabyJeu();
+        LabyJeu laby = (LabyJeu) jeu;
 
         // recupere un pinceau pour dessiner
         final GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -19,7 +17,6 @@ public class LabyDessin implements DessinJeu {
         // dessin fond
         gc.setFill(Color.LIGHTGRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
 
         // dessin mur
         gc.setFill(Color.BLACK);

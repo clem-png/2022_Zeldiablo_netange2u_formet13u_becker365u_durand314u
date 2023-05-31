@@ -180,7 +180,6 @@ public class MoteurJeu extends Application {
                         throw new RuntimeException(e);
                     }
 
-
                     // ajoute la duree dans les statistiques
                     frameStats.addFrame(elapsedTime);
 
