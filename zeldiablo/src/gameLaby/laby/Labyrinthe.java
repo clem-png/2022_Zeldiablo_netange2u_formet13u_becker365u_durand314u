@@ -155,10 +155,16 @@ public class Labyrinthe {
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]) {
-            if (!this.monstre.etrePresent(suivante[0] , suivante[1] )|| this.monstre==null){
-            // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+            if (this.monstre != null) {
+                if (!this.monstre.etrePresent(suivante[0], suivante[1])) {
+                    // on met a jour personnage
+                    this.pj.x = suivante[0];
+                    this.pj.y = suivante[1];
+                }
+            } else {
+                // on met a jour personnage
+                this.pj.x = suivante[0];
+                this.pj.y = suivante[1];
             }
         }
     }
@@ -197,6 +203,7 @@ public class Labyrinthe {
 
     /**
      * return mur en (i,j)
+     *
      * @param x
      * @param y
      * @return
