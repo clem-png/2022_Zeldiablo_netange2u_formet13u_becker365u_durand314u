@@ -10,27 +10,31 @@ public class LabyJeu implements Jeu {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
 
-    private final Labyrinthe laby ;
+    private Labyrinthe laby;
 
-    public LabyJeu () throws IOException {
-        this.laby = new Labyrinthe("labySimple/laby1.txt") ;
+    public LabyJeu() {
+        try {
+            this.laby = new Labyrinthe("labySimple/laby1.txt");
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
     }
 
     @Override
     public void update(double secondes, Clavier clavier) {
-        if (clavier.haut){
-            laby.deplacerPerso("Haut");
+        if (clavier.haut) {
+            laby.deplacerPerso(Labyrinthe.HAUT);
         }
 
-        if (clavier.bas){
+        if (clavier.bas) {
             laby.deplacerPerso("Bas");
         }
 
-        if (clavier.gauche){
+        if (clavier.gauche) {
             laby.deplacerPerso("Gauche");
         }
 
-        if (clavier.droite){
+        if (clavier.droite) {
             laby.deplacerPerso("Droite");
         }
     }
@@ -45,6 +49,8 @@ public class LabyJeu implements Jeu {
         return false;
     }
 
-    public Labyrinthe getLaby() { return this.laby ;}
-    
+    public Labyrinthe getLaby() {
+        return this.laby;
+    }
+
 }
