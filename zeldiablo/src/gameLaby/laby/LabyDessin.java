@@ -24,13 +24,17 @@ public class LabyDessin implements DessinJeu {
         for (int i = 0; i < laby.getLaby().getLength(); i++) {
             for (int j = 0; j < laby.getLaby().getLengthY(); j++) {
                 if (laby.getLaby().getMur(i, j)) {
-                    gc.fillRect(i * 50, j * 50, 50, 50);
+                    gc.fillRect(i * 20, j * 20, 20, 20);
                 }
             }
         }
 
         // Dessin du joueur
         gc.setFill(Color.RED);
-        gc.fillOval(laby.getLaby().pj.x * 50, laby.getLaby().pj.y * 50, 50, 50);
+        gc.fillOval(laby.getLaby().pj.x * 20, laby.getLaby().pj.y * 20, 20, 20);
+
+        // Dessin du monstre
+        gc.setFill(Color.GREEN);
+        gc.fillOval(laby.getLaby().monstre.x * 20, laby.getLaby().monstre.y * 20, 20, 20);
     }
 }
