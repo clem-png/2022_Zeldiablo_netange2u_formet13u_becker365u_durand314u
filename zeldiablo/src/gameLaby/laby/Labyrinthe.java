@@ -156,18 +156,21 @@ public class Labyrinthe {
                         throw new Error("caractere inconnu " + c);
                 }
             }
-
-            for (int a = 0; a < this.portes.size(); a++) {
-                int var = (int) (Math.random() * nbCaseVide);
-                Declencheur d  = new Declencheur(this.colVide[var], this.ligVide[var]);
-                //enleve la case vide de la liste
-                for (int b = var; b < nbCaseVide; b++) {
-                    this.colVide[b] = this.colVide[b + 1];
-                    this.ligVide[b] = this.ligVide[b + 1];
+            if (portes.size() > 0) {
+                this.Trigger = new ArrayList<Declencheur>();
+                for (int a = 0; a < this.portes.size(); a++) {
+                    int var = (int) (Math.random() * nbCaseVide);
+                    Declencheur d  = new Declencheur(this.colVide[var], this.ligVide[var]);
+                    //enleve la case vide de la liste
+                    for (int b = var; b < nbCaseVide; b++) {
+                        this.colVide[b] = this.colVide[b + 1];
+                        this.ligVide[b] = this.ligVide[b + 1];
+                    }
+                    nbCaseVide--;
+                    this.portes.get(a).setDeclencheur(d);
                 }
-                nbCaseVide--;
-                this.portes.get(a).setDeclencheur(d);
             }
+
 
 
 
