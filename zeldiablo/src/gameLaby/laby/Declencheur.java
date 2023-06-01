@@ -4,7 +4,7 @@ public class Declencheur {
     private int x, y;
     private boolean active;
 
-    public Declencheur (int x, int y, boolean act){
+    public Declencheur (int x, int y){
         this.x = x ;
         this.y = y ;
         this.active = false;

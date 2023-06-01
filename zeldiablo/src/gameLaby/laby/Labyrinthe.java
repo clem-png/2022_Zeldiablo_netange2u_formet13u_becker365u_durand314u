@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -19,6 +20,8 @@ public class Labyrinthe {
     public static final char VIDE = '.';
     public static final char MONSTRE = 'M';
 
+    public static final char PORTE = 'D';
+
     /**
      * constantes actions possibles
      */
@@ -31,12 +34,26 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
-    public Monstre monstre;
+    ArrayList<Monstre> monstres;
+
+    /**
+     * les portes du labyrinthe
+     */
+
+    ArrayList<Porte> portes;
 
     /**
      * les murs du labyrinthe
      */
     public boolean[][] murs;
+
+    public int[] colVide;
+    public int[] ligVide;
+
+    int nbCaseVide;
+
+    ArrayList<Declencheur> Trigger;
+
 
     /**
      * retourne la case suivante selon une actions
@@ -99,6 +116,8 @@ public class Labyrinthe {
         // stocke les indices courants
         int numeroLigne = 0;
 
+        int nbCaseVide = 0;
+
         // parcours le fichier
         while (ligne != null) {
 
@@ -111,6 +130,9 @@ public class Labyrinthe {
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
+                        this.colVide = new int[colonne];
+                        this.ligVide = new int[numeroLigne];
+                        nbCaseVide++;
                         break;
                     case PJ:
                         // pas de mur
@@ -122,13 +144,32 @@ public class Labyrinthe {
                         //pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         //ajout du monstre
-                        this.monstre = new Monstre(colonne, numeroLigne);
+                        this.monstres.add(new Monstre(colonne, numeroLigne));
                         break;
-
+                    case PORTE:
+                        //pas de mur
+                        this.murs[colonne][numeroLigne] = false;
+                        //ajout de la porte
+                        this.portes.add (new Porte(colonne, numeroLigne));
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
             }
+
+            for (int a = 0; a < this.portes.size(); a++) {
+                int var = (int) (Math.random() * nbCaseVide);
+                Declencheur d  = new Declencheur(this.colVide[var], this.ligVide[var]);
+                //enleve la case vide de la liste
+                for (int b = var; b < nbCaseVide; b++) {
+                    this.colVide[b] = this.colVide[b + 1];
+                    this.ligVide[b] = this.ligVide[b + 1];
+                }
+                nbCaseVide--;
+                this.portes.get(a).setDeclencheur(d);
+            }
+
+
 
             // lecture
             ligne = bfRead.readLine();
@@ -155,11 +196,13 @@ public class Labyrinthe {
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]) {
-            if (this.monstre != null) {
-                if (!this.monstre.etrePresent(suivante[0], suivante[1])) {
-                    // on met a jour personnage
-                    this.pj.x = suivante[0];
-                    this.pj.y = suivante[1];
+            if (this.monstres != null) {
+                for (int i = 0; i < this.monstres.size(); i++) {
+                    if (!this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
+                        // on met a jour personnage
+                        this.pj.x = suivante[0];
+                        this.pj.y = suivante[1];
+                    }
                 }
             } else {
                 // on met a jour personnage
