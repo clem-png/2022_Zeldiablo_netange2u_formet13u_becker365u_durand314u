@@ -100,6 +100,10 @@ public class Labyrinthe {
         FileReader fichier = new FileReader(nom);
         BufferedReader bfRead = new BufferedReader(fichier);
 
+        this.monstres = new ArrayList<Monstre>();
+        this.portes = new ArrayList<Porte>();
+        
+
         int nbLignes, nbColonnes;
         // lecture nblignes
         nbLignes = Integer.parseInt(bfRead.readLine());
@@ -156,7 +160,7 @@ public class Labyrinthe {
                         throw new Error("caractere inconnu " + c);
                 }
             }
-            if (portes.size() > 0) {
+            if (portes != null) {
                 this.Trigger = new ArrayList<Declencheur>();
                 for (int a = 0; a < this.portes.size(); a++) {
                     int var = (int) (Math.random() * nbCaseVide);
