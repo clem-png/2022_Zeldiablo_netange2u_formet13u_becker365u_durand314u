@@ -2,9 +2,6 @@ package gameLaby.laby;
 
 import moteurJeu.MoteurJeu;
 
-import java.io.File;
-import java.io.IOException;
-
 
 public class MainLaby {
     public static void main(String[] args) {
@@ -13,9 +10,7 @@ public class MainLaby {
         int pFPS = 60;
 
 
-
-
-        LabyJeu labyjeu = new LabyJeu();
+        LabyJeu labyjeu = new LabyJeu(args[0]);
         LabyDessin labydessin = new LabyDessin();
 
         MoteurJeu.setTaille(width,height);
@@ -23,5 +18,4 @@ public class MainLaby {
 
         MoteurJeu.launch(labyjeu , labydessin);
     }
-
 }

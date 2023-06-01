@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+//Classe abandonnée car, nous voulions faire un menu de selection des différents labyrinthes avec des boutons qui serait générés
+// en fonction du nombre de fichiers labyrinthe dans le dossier labySimple. Malheureusement, l'utilisation des boutons n'est
+//pas possible car, la version du SDk et, les bibliothèques javafx ne marche pas
+
 public class Menu extends Application {
 
     String chemin = "labySimple";
