@@ -33,7 +33,6 @@ public class TestLabyrinthe {
         int[] suivant = Labyrinthe.getSuivant(1, 1, Labyrinthe.DROITE);
         assertArrayEquals(new int[]{2, 1}, suivant);
     }
-
     @Test
     public void testGetSuivant_Gauche() {
         int[] suivant = Labyrinthe.getSuivant(1, 1, Labyrinthe.GAUCHE);

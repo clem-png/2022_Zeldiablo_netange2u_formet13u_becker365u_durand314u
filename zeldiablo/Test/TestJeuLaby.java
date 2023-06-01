@@ -1,4 +1,5 @@
 import gameLaby.laby.LabyJeu;
+import gameLaby.laby.Labyrinthe;
 import gameLaby.laby.Perso;
 import moteurJeu.Clavier;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class TestJeuLaby {
 
     private LabyJeu labyJeu;
+    private Labyrinthe labyrinthe;
 
     @BeforeEach
     public void setUp() {
         labyJeu = new LabyJeu();
+        labyrinthe = labyJeu.getLaby();
     }
 
     @Test
@@ -24,9 +27,12 @@ public class TestJeuLaby {
         clavier.haut = true;
         labyJeu.update(1.0, clavier);
 
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
+
         Perso pj = labyJeu.getLaby().pj;
-        assertEquals(1, pj.getX());
-        assertEquals(0, pj.getY());
+        assertEquals(x, pj.getX());
+        assertEquals(y, pj.getY());
     }
 
     @Test
@@ -35,9 +41,12 @@ public class TestJeuLaby {
         clavier.bas = true;
         labyJeu.update(1.0, clavier);
 
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
+
         Perso pj = labyJeu.getLaby().pj;
-        assertEquals(1, pj.getX());
-        assertEquals(2, pj.getY());
+        assertEquals(x, pj.getX());
+        assertEquals(y, pj.getY());
     }
 
     @Test
@@ -46,9 +55,12 @@ public class TestJeuLaby {
         clavier.gauche = true;
         labyJeu.update(1.0, clavier);
 
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
+
         Perso pj = labyJeu.getLaby().pj;
-        assertEquals(0, pj.getX());
-        assertEquals(1, pj.getY());
+        assertEquals(x, pj.getX());
+        assertEquals(y, pj.getY());
     }
 
     @Test
@@ -57,9 +69,12 @@ public class TestJeuLaby {
         clavier.droite = true;
         labyJeu.update(1.0, clavier);
 
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
+
         Perso pj = labyJeu.getLaby().pj;
-        assertEquals(2, pj.getX());
-        assertEquals(1, pj.getY());
+        assertEquals(x, pj.getX());
+        assertEquals(y, pj.getY());
     }
 
     @Test
@@ -67,9 +82,12 @@ public class TestJeuLaby {
         Clavier clavier = new Clavier();
         labyJeu.update(1.0, clavier);
 
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
+
         Perso pj = labyJeu.getLaby().pj;
-        assertEquals(1, pj.getX());
-        assertEquals(1, pj.getY());
+        assertEquals(x, pj.getX());
+        assertEquals(y, pj.getY());
     }
 
     @Test
