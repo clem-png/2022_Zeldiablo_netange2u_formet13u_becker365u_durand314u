@@ -167,6 +167,7 @@ public class Labyrinthe {
                 for (int a = 0; a < this.portes.size(); a++) {
                     int var = (int) (Math.random() * nbCaseVide);
                     Declencheur d  = new Declencheur(this.colVide.get(var), this.ligVide.get(var));
+                    this.Trigger.add(d);
                     //enleve la case vide de la liste
                     this.colVide.remove(var);
                     this.ligVide.remove(var);
@@ -195,6 +196,8 @@ public class Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
+
+        boolean surMonstre = false;
         // case courante
         int[] courante = {this.pj.x, this.pj.y};
 
@@ -205,12 +208,33 @@ public class Labyrinthe {
         if (!this.murs[suivante[0]][suivante[1]]) {
             if (this.monstres != null) {
                 for (int i = 0; i < this.monstres.size(); i++) {
-                    if (!this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
+                    if (this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
                         // on met a jour personnage
+                        surMonstre = true;
+                    }
+                }
+                if (!surMonstre) {
+
+
+
+                    if(this.portes != null){
+                        for(int i = 0; i < this.portes.size(); i++){
+                            if(this.portes.get(i).etrePresent(suivante[0], suivante[1])){
+                                this.portes.get(i).ouvrir();
+                            }
+                        }
+                    }
+                    else {
                         this.pj.x = suivante[0];
                         this.pj.y = suivante[1];
                     }
+
+
                 }
+                else {
+                    surMonstre = false;
+                }
+
             } else {
                 // on met a jour personnage
                 this.pj.x = suivante[0];
