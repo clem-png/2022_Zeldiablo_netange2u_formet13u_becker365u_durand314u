@@ -5,10 +5,10 @@ public class Porte {
      private Declencheur declencheur;
      private boolean ouvert ;
 
-     public Porte(int x , int y , Declencheur dec){
+     public Porte(int x , int y ){
           this.x = x ;
           this.y = y ;
-          this.declencheur = dec ;
+          this.declencheur = null ;
           this.ouvert = false ;
      }
 
@@ -32,6 +32,9 @@ public class Porte {
 
      public Declencheur getDeclencheur(){
           return this.declencheur;
+     }
+     public void setDeclencheur(Declencheur d){
+          this.declencheur = d ;
      }
 
 }
