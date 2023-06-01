@@ -45,6 +45,12 @@ public class LabyJeu implements Jeu {
         if (clavier.droite) {
             laby.deplacerPerso("Droite");
         }
+
+        laby.deplacerMonstreAll();
+
+        if (clavier.espace){
+            laby.attaque();
+        }
     }
 
     @Override
@@ -54,7 +60,13 @@ public class LabyJeu implements Jeu {
 
     @Override
     public boolean etreFini() {
-        return false;
+        boolean b = true ;
+        for (int i = 0 ; i<laby.monstres.size() ; i++){
+            if (!laby.monstres.get(i).etreMort()){
+                b = true ;
+            }
+        }
+        return b ;
     }
 
     public Labyrinthe getLaby() {
