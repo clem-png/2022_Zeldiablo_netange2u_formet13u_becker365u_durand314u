@@ -323,7 +323,7 @@ public class Labyrinthe {
             }
         }
 
-        if (this.Trigger != null) {
+        if (this.Trigger  != null) {
             for (int i = 0; i < this.Trigger.size(); i++) {
                 if (this.Trigger.get(i).etrePresent(this.pj.x, this.pj.y)) {
                     this.Trigger.get(i).setActive();
