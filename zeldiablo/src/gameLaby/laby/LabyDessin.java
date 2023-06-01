@@ -40,12 +40,21 @@ public class LabyDessin implements DessinJeu {
                             gc.fillRect(i * 50, j * 50, 50, 50);
                         }
                     }
+
+                    if (laby.getLaby().Trigger != null) {
+                        for (int k = 0; k < laby.getLaby().Trigger.size(); k++) {
+                            if (laby.getLaby().Trigger.get(k).etrePresent(i, j)) {
+                                gc.setFill(Color.YELLOW);
+                                gc.fillRect(i * 50, j * 50, 50, 50);
+                            }
+                        }
+                    }
                 }
             }
-        }
 
-        // Dessin du joueur
-        gc.setFill(Color.RED);
-        gc.fillOval(laby.getLaby().pj.x * 50, laby.getLaby().pj.y * 50, 50, 50);
+            // Dessin du joueur
+            gc.setFill(Color.RED);
+            gc.fillOval(laby.getLaby().pj.x * 50, laby.getLaby().pj.y * 50, 50, 50);
+        }
     }
 }

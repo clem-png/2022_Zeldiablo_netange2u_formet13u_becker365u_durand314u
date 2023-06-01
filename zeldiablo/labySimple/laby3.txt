@@ -10,7 +10,7 @@ X...X....X.........X
 X..X..........X....X
 X.....X..X.........X
 XXXXXXXXXXX........X
-X....M...X.........X
-X....X...D.........X
-XX..X....X.......PXX
+X;;;;M;;;X.........X
+X;;;;X;;;D.........X
+XX;;X;;;;X.......PXX
 XXXXXXXXXXXXXXXXXXXX
