@@ -20,6 +20,14 @@ public class LabyJeu implements Jeu {
         }
     }
 
+    public LabyJeu(String s) {
+        try {
+            this.laby = new Labyrinthe(s);
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+
     @Override
     public void update(double secondes, Clavier clavier) {
         if (clavier.haut) {
