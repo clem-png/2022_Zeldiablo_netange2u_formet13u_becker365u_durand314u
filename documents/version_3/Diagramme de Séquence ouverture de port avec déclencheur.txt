@@ -1,0 +1,16 @@
+@startuml
+
+participant "Po : Porte" as PO
+participant "Declenche : Declencheur" as D
+participant "Pers : Perso" as P
+
+PO -> D : "ouvrir()"
+D -> P: "etrePresent()"
+P --> D : "true"
+D --> PO : "true"
+PO -> PO : "ouvert"
+PO --> PO : "true"
+
+
+
+@enduml
