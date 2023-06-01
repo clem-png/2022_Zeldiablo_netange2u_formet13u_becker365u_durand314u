@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Perso {
+public class Perso implements Entite {
 
     /**
      * position du personnage
