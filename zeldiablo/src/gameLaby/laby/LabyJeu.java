@@ -22,7 +22,7 @@ public class LabyJeu implements Jeu {
 
     public LabyJeu(String s) {
         try {
-            this.laby = new Labyrinthe(s);
+            this.laby = new Labyrinthe("labySimple/"+s);
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
