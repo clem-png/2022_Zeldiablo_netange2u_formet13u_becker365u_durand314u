@@ -1,5 +1,7 @@
 package gameLaby.laby;
 
+import moteurJeu.Clavier;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -193,83 +195,6 @@ public class Labyrinthe {
         bfRead.close();
     }
 
-    public void deplacerMonstreAll(){
-        int alea = 0;
-        for (int q = 0; q < this.monstres.size(); q++) {
-            alea = (int) (Math.random() * 4);
-
-            boolean surMonstre = false;
-            boolean surPorte = false;
-            boolean surPj = false;
-            // case courante
-            int[] courante = {this.monstres.get(q).x, this.monstres.get(q).y};
-
-            String action = "";
-            switch (alea) {
-                case 0:
-                    action = HAUT;
-                    break;
-                case 1:
-                    action = BAS;
-                    break;
-                case 2:
-                    action = DROITE;
-                    break;
-                case 3:
-                    action = GAUCHE;
-                    break;
-            }
-
-            int[] suivante = getSuivant(courante[0], courante[1], action);
-
-            // si c'est pas un mur, on effectue le deplacement
-            if (!this.murs[suivante[0]][suivante[1]]) {
-                if (this.monstres != null) {
-                    for (int i = 0; i < this.monstres.size(); i++) {
-                        if (this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
-                            // on met a jour personnage
-                            surMonstre = true;
-                        }
-                    }
-                    if (!surMonstre) {
-                        if(this.portes != null){
-                            for(int i = 0; i < this.portes.size(); i++){
-                                if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())){
-                                    surPorte = true;
-                                }
-                            }
-                        }
-                        if (!surPorte) {
-
-                            if(this.pj.etrePresent(suivante[0], suivante[1])){
-                                surPj = true;
-                            }
-                            if(!surPj){
-                                this.monstres.get(q).x = suivante[0];
-                                this.monstres.get(q).y = suivante[1];
-                            }
-                            else{
-                                surPj = false;
-                            }
-                        }
-                        else {
-                            // on met a jour personnage
-                            surPorte = false;
-                        }
-                    }
-                    else {
-                        surMonstre = false;
-                    }
-                } else {
-                    // on met a jour personnage
-                    this.monstres.get(q).x = suivante[0];
-                    this.monstres.get(q).y = suivante[1];
-                }
-            }
-
-        }
-    }
-
 
     /**
      * deplace le personnage en fonction de l'action.
@@ -304,6 +229,7 @@ public class Labyrinthe {
                             }
                         }
                     }
+
                     if (!surPorte) {
                         this.pj.x = suivante[0];
                         this.pj.y = suivante[1];
@@ -333,6 +259,12 @@ public class Labyrinthe {
         }
     }
 
+    public boolean attaquer(Clavier clavier, Perso p, Monstre m){
+        if(clavier.haut /*&& perso proche de monstre*/){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * jamais fini

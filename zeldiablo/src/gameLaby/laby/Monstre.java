@@ -6,6 +6,7 @@ public class Monstre {
      * position du personnage
      */
     int x, y;
+    int pv = 2;
 
     /**
      * constructeur
@@ -48,5 +49,20 @@ public class Monstre {
     public int getY() {
         //getter
         return this.y;
+    }
+
+    public boolean subirAttaque(Monstre m, Perso p){
+        if(p.attaquer(m)) {
+            this.pv--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean etreMort(){
+        if(this.pv == 0){
+            return true;
+        }
+        return false;
     }
 }

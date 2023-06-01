@@ -6,7 +6,12 @@ import javafx.scene.paint.Color;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import java.util.ArrayList;
+
 public class LabyDessin implements DessinJeu {
+
+    private static final int SIZE = 20;
+
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
         LabyJeu laby = (LabyJeu) jeu;
@@ -23,30 +28,36 @@ public class LabyDessin implements DessinJeu {
             for (int j = 0; j < laby.getLaby().getLengthY(); j++) {
                 if (laby.getLaby().getMur(i, j)) {
                     gc.setFill(Color.BLACK);
-                    gc.fillRect(i * 50, j * 50, 50, 50);
+                    gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
 
                 } else if (laby.getLaby().monstres != null) {
                     for (int k = 0; k < laby.getLaby().monstres.size(); k++) {
-                        if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
-                            gc.setFill(Color.GREEN);
-                            gc.fillOval(i * 50, j * 50, 50, 50);
-                        }
+                     /*   while (!laby.getLaby().monstres.get(k).etreMort()) {*/
+                            if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
+                            /*    if (!laby.getLaby().monstres.get(k).subirAttaque()) {*/
+                                    gc.setFill(Color.GREEN);
+                            /*    } else {
+                                    gc.setFill(Color.BLUE);*/
+                                }
+                                gc.fillOval(i * SIZE, j * SIZE, SIZE, SIZE);
+                           /* }
+                        }*/
                     }
                 }
+
                 if (laby.getLaby().portes != null) {
                     for (int k = 0; k < laby.getLaby().portes.size(); k++) {
                         if (laby.getLaby().portes.get(k).etrePresent(i, j) && !laby.getLaby().portes.get(k).getDeclencheur().getActive()) {
                             gc.setFill(Color.BLACK);
-                            gc.fillRect(i * 50, j * 50, 50, 50);
+                            gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
                         }
 
                     }
-
                     if (laby.getLaby().Trigger != null) {
                         for (int k = 0; k < laby.getLaby().Trigger.size(); k++) {
                             if (laby.getLaby().Trigger.get(k).etrePresent(i, j)) {
                                 gc.setFill(Color.YELLOW);
-                                gc.fillRect(i * 50, j * 50, 50, 50);
+                                gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
                             }
                         }
                     }
@@ -55,7 +66,7 @@ public class LabyDessin implements DessinJeu {
 
             // Dessin du joueur
             gc.setFill(Color.RED);
-            gc.fillOval(laby.getLaby().pj.x * 50, laby.getLaby().pj.y * 50, 50, 50);
+            gc.fillOval(laby.getLaby().pj.x * SIZE, laby.getLaby().pj.y * SIZE, SIZE, SIZE);
         }
     }
 }
