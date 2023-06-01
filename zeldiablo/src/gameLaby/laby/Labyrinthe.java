@@ -47,8 +47,8 @@ public class Labyrinthe {
      */
     public boolean[][] murs;
 
-    public int[] colVide;
-    public int[] ligVide;
+    public ArrayList<Integer> colVide;
+    public ArrayList<Integer> ligVide;
 
     int nbCaseVide;
 
@@ -102,7 +102,9 @@ public class Labyrinthe {
 
         this.monstres = new ArrayList<Monstre>();
         this.portes = new ArrayList<Porte>();
-        
+        this.colVide = new ArrayList<Integer>();
+        this.ligVide = new ArrayList<Integer>();
+
 
         int nbLignes, nbColonnes;
         // lecture nblignes
@@ -134,8 +136,8 @@ public class Labyrinthe {
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.colVide = new int[colonne];
-                        this.ligVide = new int[numeroLigne];
+                        this.colVide.add(colonne);
+                        this.ligVide.add(numeroLigne);
                         nbCaseVide++;
                         break;
                     case PJ:
@@ -164,12 +166,10 @@ public class Labyrinthe {
                 this.Trigger = new ArrayList<Declencheur>();
                 for (int a = 0; a < this.portes.size(); a++) {
                     int var = (int) (Math.random() * nbCaseVide);
-                    Declencheur d  = new Declencheur(this.colVide[var], this.ligVide[var]);
+                    Declencheur d  = new Declencheur(this.colVide.get(var), this.ligVide.get(var));
                     //enleve la case vide de la liste
-                    for (int b = var; b < nbCaseVide; b++) {
-                        this.colVide[b] = this.colVide[b + 1];
-                        this.ligVide[b] = this.ligVide[b + 1];
-                    }
+                    this.colVide.remove(var);
+                    this.ligVide.remove(var);
                     nbCaseVide--;
                     this.portes.get(a).setDeclencheur(d);
                 }
