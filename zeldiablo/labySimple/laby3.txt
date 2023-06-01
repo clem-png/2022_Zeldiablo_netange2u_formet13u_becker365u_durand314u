@@ -1,0 +1,16 @@
+14
+20
+XXXXXXXXXXXXXXXXXXXX
+XX.......X........XX
+X........X.........X
+X........X...X.....X
+X..X.....X........XX
+X......XXX.........X
+X...X....X.........X
+X..X..........X....X
+X.....X..X.........X
+XXXXXXXXXXX........X
+X........X.........X
+X....X...D.........X
+XX..X....X.......PXX
+XXXXXXXXXXXXXXXXXXXX
