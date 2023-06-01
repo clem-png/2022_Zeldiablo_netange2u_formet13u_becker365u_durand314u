@@ -1,0 +1,183 @@
+Fonctionnalités 1: etre construit
+->coordonnée de départ
+-> etre dans une zone libre 
+-> avoir 2 paramètre pour représenter les coordonnées
+
+Fonctionnalités 2: etre représenté
+-> avoir un symbole associé : par exemple un "M" ou un "@" ou un "!"
+
+
+Fonctionnalité 3 : pouvoir etre afficher
+-> représenter par un carré, violet
+
+*Diagramme de sequence creation monstre
+
+@startuml
+
+!theme plain
+
+skinparam linetype ortho
+
+actor main
+participant Labyrinthe
+participant Monster
+
+
+
+main -> Labyrinthe ** : create
+activate Labyrinthe
+alt si caractère M
+  Labyrinthe -> Monster ** : create
+end
+deactivate Labyrinthe
+
+Labyrinthe --> main
+
+@enduml
+
+
+*Diagramme de sequence afficher le monstre
+
+@startuml
+
+!theme plain
+
+skinparam linetype ortho
+
+actor LabyDessin
+
+loop : parcour le Labyrinthe pour afficher le Labyrinthe
+
+
+LabyDessin -> Monster : etrePresent
+activate Monster
+Monster --> LabyDessin
+deactivate Monster
+alt si Monster est au coordonnée
+
+
+else
+  
+end
+
+end
+
+deactivate LabyDessin
+
+@enduml
+
+
+*Diagramme de sequenc empeche le perso d'aller sur la meme case que le monstre
+
+@startuml
+
+!theme plain
+
+skinparam linetype ortho
+
+actor LabyJeu
+participant Labyrinthe
+participant Monster
+
+
+LabyJeu -> Labyrinthe : deplacerPerso(Haut)
+activate Labyrinthe
+
+
+
+Labyrinthe -> Monster : etre présent
+activate Monster
+Monster --> Labyrinthe
+deactivate Monster
+
+alt si Monster est absent
+   
+  Labyrinthe -> perso : modification x
+  activate perso
+  perso --> Labyrinthe
+  Labyrinthe -> perso : modification y
+  perso --> Labyrinthe
+  deactivate perso
+else
+  
+end
+
+Labyrinthe --> LabyJeu
+
+deactivate Labyrinthe
+
+@enduml
+
+
+*Diagramme de classe
+
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class LabyDessin {
+  + LabyDessin(): 
+  + dessinerJeu(Jeu, Canvas): void
+}
+class LabyJeu {
+  + LabyJeu(): 
+  + WIDTH: int
+  + HEIGHT: int
+  - laby: Labyrinthe
+  + etreFini(): boolean
+  + init(): void
+  + update(double, Clavier): void
+  + getLaby(): Labyrinthe
+}
+class Labyrinthe {
+  + Labyrinthe(String): 
+  + MUR: char
+  + MONSTRE: char
+  + BAS: String
+  + murs: boolean[][]
+  + pj: Perso
+  + DROITE: String
+  + HAUT: String
+  + VIDE: char
+  + PJ: char
+  + GAUCHE: String
+  + monstre: Monstre
+  + getMur(int, int): boolean
+  + getLengthY(): int
+  + getLength(): int
+  + deplacerPerso(String): void
+  + etreFini(): boolean
+  ~ getSuivant(int, int, String): int[]
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+}
+class MainLaby {
+  + MainLaby(): 
+  + main(String[]): void
+}
+class Monstre {
+  + Monstre(int, int): 
+  ~ y: int
+  ~ x: int
+  + getX(): int
+  + etrePresent(int, int): boolean
+  + getY(): int
+}
+class Perso {
+  + Perso(int, int): 
+  ~ x: int
+  ~ y: int
+  + etrePresent(int, int): boolean
+  + getX(): int
+  + getY(): int
+}
+
+LabyJeu    "1" *-[#595959,plain]-> "laby\n1" Labyrinthe 
+Labyrinthe "1" *-[#595959,plain]-> "monstre\n1" Monstre    
+Labyrinthe "1" *-[#595959,plain]-> "pj\n1" Perso      
+
+@enduml
