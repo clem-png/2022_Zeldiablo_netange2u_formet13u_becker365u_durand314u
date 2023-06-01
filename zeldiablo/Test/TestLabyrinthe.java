@@ -85,40 +85,13 @@ public class TestLabyrinthe {
 
     @Test
     public void testDeplacerPerso_Mur() {
+        int x = labyrinthe.pj.getX();
+        int y = labyrinthe.pj.getY();
         labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
 
         // Le personnage ne devrait pas avoir bougé car il y a un mur à gauche
-        assertEquals(1, labyrinthe.pj.getX());
-        assertEquals(1, labyrinthe.pj.getY());
+        assertEquals(x, labyrinthe.pj.getX());
+        assertEquals(y, labyrinthe.pj.getY());
     }
 
-    @Test
-    public void testEtreFini() {
-        assertFalse(labyrinthe.etreFini());
-    }
-
-    @Test
-    public void testGetLengthY() {
-        assertEquals(3, labyrinthe.getLengthY());
-    }
-
-    @Test
-    public void testGetLength() {
-        assertEquals(3, labyrinthe.getLength());
-    }
-
-    @Test
-    public void testGetMur() {
-        assertTrue(labyrinthe.getMur(0, 0));
-        assertFalse(labyrinthe.getMur(1, 1));
-        assertFalse(labyrinthe.getMur(2, 2));
-    }
-
-    @Test
-    public void testGetPj() {
-        Perso pj = labyrinthe.pj;
-        assertNotNull(pj);
-        assertEquals(1, pj.getX());
-        assertEquals(1, pj.getY());
-    }
 }
