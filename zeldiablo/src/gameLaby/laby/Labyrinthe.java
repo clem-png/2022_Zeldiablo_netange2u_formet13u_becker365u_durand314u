@@ -46,7 +46,7 @@ public class Labyrinthe {
      * @param action action effectuee
      * @return case suivante
      */
-    static int[] getSuivant(int x, int y, String action) {
+    public static int[] getSuivant(int x, int y, String action) {
         switch (action) {
             case HAUT:
                 // on monte une ligne
@@ -212,4 +212,5 @@ public class Labyrinthe {
         // utilise le tableau de boolean
         return this.murs[x][y];
     }
+
 }
