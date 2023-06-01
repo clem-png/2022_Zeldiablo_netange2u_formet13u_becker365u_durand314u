@@ -135,10 +135,15 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = true;
                         break;
                     case VIDE:
+
                         this.murs[colonne][numeroLigne] = false;
                         this.colVide.add(colonne);
                         this.ligVide.add(numeroLigne);
                         nbCaseVide++;
+                        break;
+                    case ';':
+                        // pas de mur
+                        this.murs[colonne][numeroLigne] = false;
                         break;
                     case PJ:
                         // pas de mur
@@ -198,6 +203,7 @@ public class Labyrinthe {
     public void deplacerPerso(String action) {
 
         boolean surMonstre = false;
+        boolean surPorte = false;
         // case courante
         int[] courante = {this.pj.x, this.pj.y};
 
@@ -219,14 +225,19 @@ public class Labyrinthe {
 
                     if(this.portes != null){
                         for(int i = 0; i < this.portes.size(); i++){
-                            if(this.portes.get(i).etrePresent(suivante[0], suivante[1])){
-                                this.portes.get(i).ouvrir();
+                            if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getOuvert())){
+                                surPorte = true;
                             }
                         }
                     }
-                    else {
+
+                    if (!surPorte) {
                         this.pj.x = suivante[0];
                         this.pj.y = suivante[1];
+                    }
+                    else {
+                        // on met a jour personnage
+                        surPorte = false;
                     }
 
 
