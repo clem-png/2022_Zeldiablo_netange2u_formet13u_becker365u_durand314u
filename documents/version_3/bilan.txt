@@ -1,0 +1,23 @@
+Pour cette partite, nous avons choisit dans la partie Gestion des labyrinthe, Ouverture de passage secrets et, gestion de niveaux. Nous n'avons pas rencontrer de grand problèmes excepté pour le menu que nous avons mal compris et donc, essayé de faire quelquechose qui n'était pas demandé (explication dans la classe menu). 
+
+Pour la répartition des tâches : 
+
+Doryann : 
+-Création de la classe porte
+-Modification de laby, ajout d'un constructeur qui prend un string en paramètre
+-Modification de labyDessin pour afficher le déclencheur et la porte
+
+Clément : 
+-Création de la classe entité
+-Modification de labyrinthe pour détecter la porte, générer le déclencheur de facon aléatoire, adaptation de plusieurs monstres, ajout de l'espace bloquer par la porte (pour éviter que le déclencheur n'y apparaisse) 
+
+Quentin : 
+-Création de la classe déclencheur, 
+-Diagramme de classe et séquence du fonctionnement de la porte
+
+Romain : 
+-Création de la classe menu (qui était censé contenir les boutons de la selection) 
+-Modification du main pour le choix du labyrinthe
+-Bilan
+
+
