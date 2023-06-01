@@ -39,4 +39,8 @@ public class Declencheur {
         return active;
     }
 
+    public void setActive(){
+        this.active = true;
+    }
+
 }

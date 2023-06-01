@@ -220,12 +220,9 @@ public class Labyrinthe {
                     }
                 }
                 if (!surMonstre) {
-
-
-
                     if(this.portes != null){
                         for(int i = 0; i < this.portes.size(); i++){
-                            if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getOuvert())){
+                            if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())){
                                 surPorte = true;
                             }
                         }
@@ -239,17 +236,23 @@ public class Labyrinthe {
                         // on met a jour personnage
                         surPorte = false;
                     }
-
-
                 }
                 else {
                     surMonstre = false;
                 }
-
             } else {
                 // on met a jour personnage
                 this.pj.x = suivante[0];
                 this.pj.y = suivante[1];
+            }
+        }
+
+        if (this.Trigger != null) {
+            for (int i = 0; i < this.Trigger.size(); i++) {
+                if (this.Trigger.get(i).etrePresent(this.pj.x, this.pj.y)) {
+                    this.Trigger.get(i).setActive();
+                    System.out.println("porte active : " + this.Trigger.get(i).getActive());
+                }
             }
         }
     }
