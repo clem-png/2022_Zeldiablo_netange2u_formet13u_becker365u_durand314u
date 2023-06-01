@@ -22,7 +22,8 @@ public class LabyJeu implements Jeu {
 
     public LabyJeu(String s) {
         try {
-            this.laby = new Labyrinthe("labySimple/"+s);
+            //this.laby = new Labyrinthe("labySimple/"+s);
+            this.laby = new Labyrinthe("labySimple/laby3.txt");
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
@@ -49,7 +50,7 @@ public class LabyJeu implements Jeu {
         laby.deplacerMonstreAll();
 
         if (clavier.espace){
-            laby.attaque();
+            //laby.attaque();
         }
     }
 
@@ -59,12 +60,16 @@ public class LabyJeu implements Jeu {
     }
 
     @Override
+
     public boolean etreFini() {
         boolean b = true ;
         for (int i = 0 ; i<laby.monstres.size() ; i++){
+            /*
             if (!laby.monstres.get(i).etreMort()){
                 b = true ;
             }
+
+             */
         }
         return b ;
     }
