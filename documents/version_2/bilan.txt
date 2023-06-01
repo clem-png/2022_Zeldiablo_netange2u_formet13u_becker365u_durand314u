@@ -1,0 +1,28 @@
+Bilan Tp : 
+
+Dans ce tp, nous avons réalisé les bases pour la SAE. 
+
+Premièrement, nous avons eu des problèmes avec le github assez rapidement ce qui, nous a obligé à recréer un git car, il y avait trop de problèmes et de conflits au niveau du projet de plus, nous nous sommes rendu comptes que l'arborescence du projet n’était pas celle voulue. 
+Une fois le github recrée correctement, nous avons pus continuer la programmation. Pour la répartition des tâches : 
+
+Doryann : 
+-classes labyJeu, mainJeu
+-Test JUnit
+
+Romain : 
+-classe DessinJeu 
+-diagrammes de classes Q7 et Q14
+-bilan
+
+Quentin : 
+-diagramme de séquence déplacement gauche 
+-classe Monstre
+-Tests JUnit
+
+Clement : 
+-github (création et réglages des problèmes)
+-diagrammes de séquence/classe Q16
+-fichier fonctionnalité 
+
+Durant la programmation, nous avons eu plusieurs problèmes, notamment avec labyDessin et labyJeu, l’affichage fonctionnait mais, lorsque l’on déplaçait le perso l’affichage ne suivait pas. Nous avons mis pas mal de temps à trouver la solution ce qui nous créer un peu de retard. 
+

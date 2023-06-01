@@ -8,7 +8,7 @@ public class MainLaby {
     public static void main(String[] args) {
         int width = 800;
         int height = 600;
-        int pFPS = 100;
+        int pFPS = 60;
 
         LabyJeu labyjeu = new LabyJeu();
         LabyDessin labydessin = new LabyDessin();
