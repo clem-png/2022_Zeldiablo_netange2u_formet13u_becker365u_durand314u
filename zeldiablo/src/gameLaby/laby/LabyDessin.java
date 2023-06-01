@@ -35,11 +35,11 @@ public class LabyDessin implements DessinJeu {
                 }
                 if (laby.getLaby().portes != null) {
                     for (int k = 0; k < laby.getLaby().portes.size(); k++) {
-                        if (laby.getLaby().portes.get(k).etrePresent(i, j) && !laby.getLaby().portes.get(k).getOuvert()) {
+                        if (laby.getLaby().portes.get(k).etrePresent(i, j) && !laby.getLaby().portes.get(k).getDeclencheur().getActive()) {
                             gc.setFill(Color.BLACK);
                             gc.fillRect(i * 50, j * 50, 50, 50);
                         }
-                        
+
                     }
 
                     if (laby.getLaby().Trigger != null) {
