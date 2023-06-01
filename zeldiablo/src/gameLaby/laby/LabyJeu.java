@@ -14,7 +14,7 @@ public class LabyJeu implements Jeu {
 
     public LabyJeu() {
         try {
-            this.laby = new Labyrinthe("labySimple/laby1.txt");
+            this.laby = new Labyrinthe("labySimple/laby3.txt");
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
