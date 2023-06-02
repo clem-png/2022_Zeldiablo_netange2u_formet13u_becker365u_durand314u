@@ -1,0 +1,23 @@
+Dans cette itération, nous avons choisit les fonctionalités de comportement de monstre qui est du déplacement aléatoire de monstre et attaque du joueur (courte porté), mort des monstres et, changement de couleur quand le monstre prend un dégats. 
+
+
+Pour la répartition : 
+
+Quentin : 
+-Classe monstre,
+-diagramme de classe et séquence
+
+Doryann :
+-Modification de laby jeu
+-Mise à jour monstre, clavier
+
+Clément :
+-Modification de labyrinthe
+-Adapatation de monstre et perso
+
+Romain : 
+-Modification de LabyJeu
+-Bilan
+
+Le seul problème que nous avons rencontré est que, en raison du grand nombre de FPS, les monstres allaient trop vite donc, pour régler cella, nous avons baissé les FPS. 
+Autrement, nous avons eu des problème de conflits avec le git mais, rien de très problématique.
