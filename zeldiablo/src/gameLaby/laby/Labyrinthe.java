@@ -291,47 +291,47 @@ public class Labyrinthe {
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
-        // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && enAttaque == false) {
-            if (this.monstres != null) {
-                for (int i = 0; i < this.monstres.size(); i++) {
-                    if (this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
-                        // on met a jour personnage
-                        surMonstre = true;
-                    }
-                }
-                if (!surMonstre) {
-                    if(this.portes != null){
-                        for(int i = 0; i < this.portes.size(); i++){
-                            if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())){
-                                surPorte = true;
-                            }
+        if (!pj.getEnAttente()) {
+            // si c'est pas un mur, on effectue le deplacement
+            if (!this.murs[suivante[0]][suivante[1]]) {
+                if (this.monstres != null) {
+                    for (int i = 0; i < this.monstres.size(); i++) {
+                        if (this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
+                            // on met a jour personnage
+                            surMonstre = true;
                         }
                     }
-                    if (!surPorte) {
-                        this.pj.x = suivante[0];
-                        this.pj.y = suivante[1];
+                    if (!surMonstre) {
+                        if (this.portes != null) {
+                            for (int i = 0; i < this.portes.size(); i++) {
+                                if ((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())) {
+                                    surPorte = true;
+                                }
+                            }
+                        }
+                        if (!surPorte) {
+                            this.pj.x = suivante[0];
+                            this.pj.y = suivante[1];
+                        } else {
+                            // on met a jour personnage
+                            surPorte = false;
+                        }
+                    } else {
+                        surMonstre = false;
                     }
-                    else {
-                        // on met a jour personnage
-                        surPorte = false;
-                    }
+                } else {
+                    // on met a jour personnage
+                    this.pj.x = suivante[0];
+                    this.pj.y = suivante[1];
                 }
-                else {
-                    surMonstre = false;
-                }
-            } else {
-                // on met a jour personnage
-                this.pj.x = suivante[0];
-                this.pj.y = suivante[1];
             }
-        }
 
-        if (this.Trigger != null) {
-            for (int i = 0; i < this.Trigger.size(); i++) {
-                if (this.Trigger.get(i).etrePresent(this.pj.x, this.pj.y)) {
-                    this.Trigger.get(i).setActive();
-                    System.out.println("porte active : " + this.Trigger.get(i).getActive());
+            if (this.Trigger != null) {
+                for (int i = 0; i < this.Trigger.size(); i++) {
+                    if (this.Trigger.get(i).etrePresent(this.pj.x, this.pj.y)) {
+                        this.Trigger.get(i).setActive();
+                        System.out.println("porte active : " + this.Trigger.get(i).getActive());
+                    }
                 }
             }
         }

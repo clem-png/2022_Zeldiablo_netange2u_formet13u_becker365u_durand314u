@@ -50,8 +50,12 @@ public class LabyJeu implements Jeu {
         laby.deplacerMonstreAll();
 
         if (clavier.espace){
+            laby.pj.setEnAttente(true);
             System.out.println("Attaque");
             laby.attaque();
+        }
+        else {
+            laby.pj.setEnAttente(false);
         }
     }
 
