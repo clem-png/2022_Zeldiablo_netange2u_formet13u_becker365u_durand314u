@@ -67,16 +67,7 @@ public class LabyJeu implements Jeu {
     @Override
 
     public boolean etreFini() {
-        boolean b = false ;
-        for (int i = 0 ; i<laby.monstres.size() ; i++){
-            /*
-            if (!laby.monstres.get(i).etreMort()){
-                b = true ;
-            }
-
-             */
-        }
-        return b ;
+        return laby.etreFini();
     }
 
     public Labyrinthe getLaby() {
