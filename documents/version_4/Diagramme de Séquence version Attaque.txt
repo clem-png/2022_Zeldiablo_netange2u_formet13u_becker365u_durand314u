@@ -1,0 +1,25 @@
+@startuml
+
+participant "c : Clavier" as c
+participant "Laby : Labyrinthe" as l
+participant "M : Monstre" as m
+participant "Pers : Perso" as p
+participant "labyD : LabyDessin" as ld
+
+c -> l : "appuyerTouche()"
+l --> c
+l -> m : "attaque()"
+m -> p : "etrePresent()"
+p --> m : "true"
+m -> ld : "subirAttaque()"
+ld -> ld : "changement de couleur"
+ld --> ld
+ld --> m 
+m -> m : "etreMort()"
+m --> m : "true"
+m --> l : "removeMonstre"
+
+
+
+
+@enduml
