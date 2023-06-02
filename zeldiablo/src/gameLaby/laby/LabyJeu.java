@@ -50,7 +50,8 @@ public class LabyJeu implements Jeu {
         laby.deplacerMonstreAll();
 
         if (clavier.espace){
-            //laby.attaque();
+            System.out.println("Attaque");
+            laby.attaque();
         }
     }
 
