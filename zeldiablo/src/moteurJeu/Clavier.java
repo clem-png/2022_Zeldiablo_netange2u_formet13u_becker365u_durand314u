@@ -74,7 +74,7 @@ public class Clavier {
                 this.droite = false;
                 break;
 
-            case ESCAPE:
+            case SPACE:
                 this.espace = false;
                 break;
 
