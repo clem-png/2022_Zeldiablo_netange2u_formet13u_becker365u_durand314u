@@ -29,8 +29,13 @@ public class LabyDessin implements DessinJeu {
                     gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
 
                 } else if (laby.getLaby().monstres != null) {
-                        for (int k = 0; k < laby.getLaby().monstres.size(); k++) {
-                            if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
+                    for (int k = 0; k < laby.getLaby().monstres.size(); k++) {
+                        if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
+                            if (laby.getLaby().monstres.get(k).subirattaque) {
+                                gc.setFill(Color.BLUE);
+                                gc.fillOval(i * SIZE, j * SIZE, SIZE, SIZE);
+                                laby.getLaby().monstres.get(k).subirattaque = false;
+                            } else {
                                 gc.setFill(Color.GREEN);
                                 gc.fillOval(i * SIZE, j * SIZE, SIZE, SIZE);
                             }
@@ -62,3 +67,4 @@ public class LabyDessin implements DessinJeu {
             }
         }
     }
+}
