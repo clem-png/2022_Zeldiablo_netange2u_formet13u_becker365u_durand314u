@@ -4,6 +4,7 @@ package moteurJeu;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.event.EventHandler;
@@ -66,6 +67,8 @@ public class MoteurJeu extends Application {
         if (jeu != null)
             launch();
     }
+
+
 
     /**
      * frame par secondes
@@ -144,6 +147,8 @@ public class MoteurJeu extends Application {
         startAnimation(canvas);
     }
 
+
+
     /**
      * gestion de l'animation (boucle de jeu)
      *
@@ -172,6 +177,13 @@ public class MoteurJeu extends Application {
                 if (dureeEnMilliSecondes > dureeFPS) {
                     // met a jour le jeu en passant les touches appuyees
                     jeu.update(dureeEnMilliSecondes / 1_000., controle);
+
+                    // Vérifie si le jeu est terminé
+                    if (jeu.etreFini()) {
+                        // Ferme l'application
+                        Platform.exit();
+                        return;
+                    }
 
                     // dessine le jeu
                     try {
