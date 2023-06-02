@@ -9,6 +9,8 @@ public class Monstre {
     int pv = 2;
 
     boolean subirattaque ;
+    boolean mort;
+
 
     /**
      * constructeur
@@ -20,6 +22,7 @@ public class Monstre {
         this.x = dx;
         this.y = dy;
         this.subirattaque = false ;
+        this.mort = false ;
     }
 
     /**
@@ -54,16 +57,17 @@ public class Monstre {
         return this.y;
     }
 
-    public boolean subirAttaque(){
-        this.pv--;
-        this.subirattaque = true;
+    public void subirAttaque(){
+        if (pv > 0 ) {
+            this.pv--;
+            this.subirattaque = true;
+        }else{
+            this.mort = true ;
+        }
 
     }
 
     public boolean etreMort(){
-        if(this.pv == 0){
-            return true;
-        }
-        return false;
+        return this.mort ;
     }
 }

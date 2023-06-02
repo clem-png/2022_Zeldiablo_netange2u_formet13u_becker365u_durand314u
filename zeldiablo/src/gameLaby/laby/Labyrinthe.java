@@ -54,6 +54,8 @@ public class Labyrinthe {
 
     ArrayList<Declencheur> Trigger;
 
+    public boolean enAttaque;
+
 
     /**
      * retourne la case suivante selon une actions
@@ -104,6 +106,8 @@ public class Labyrinthe {
         this.portes = new ArrayList<Porte>();
         this.colVide = new ArrayList<Integer>();
         this.ligVide = new ArrayList<Integer>();
+
+        enAttaque = false;
 
 
         int nbLignes, nbColonnes;
@@ -288,7 +292,7 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]) {
+        if (!this.murs[suivante[0]][suivante[1]] && enAttaque == false) {
             if (this.monstres != null) {
                 for (int i = 0; i < this.monstres.size(); i++) {
                     if (this.monstres.get(i).etrePresent(suivante[0], suivante[1])) {
@@ -331,6 +335,30 @@ public class Labyrinthe {
                 }
             }
         }
+    }
+
+    public void attaque (){
+        enAttaque = true;
+        String[] tab = new String[4];
+        tab[0] = HAUT;
+        tab[1] = BAS;
+        tab[2] = DROITE;
+        tab[3] = GAUCHE;
+
+        for (int i = 0; i < 4; i++) {
+            int[] suivante = getSuivant(this.pj.x, this.pj.y, tab[i]);
+            if (this.monstres != null) {
+                for (int j = 0; j < this.monstres.size(); j++) {
+                    if (this.monstres.get(j).etrePresent(suivante[0], suivante[1])) {
+                        this.monstres.get(j).subirAttaque();
+                        if (this.monstres.get(j).etreMort() == true) {
+                            this.monstres.remove(j);
+                        }
+                    }
+                }
+            }
+        }
+        enAttaque = false;
     }
 
 
