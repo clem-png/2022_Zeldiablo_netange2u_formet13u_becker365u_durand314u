@@ -11,6 +11,8 @@ public class Perso implements Entite {
      */
     int x, y;
 
+    boolean avoirAmulette = false;
+
     boolean enAttente = false;
 
     /**
@@ -62,6 +64,14 @@ public class Perso implements Entite {
 
     public boolean getEnAttente() {
     	return this.enAttente;
+    }
+
+    public void setAvoirAmulette(boolean b) {
+    	this.avoirAmulette = b;
+    }
+
+    public boolean getAvoirAmulette() {
+    	return this.avoirAmulette;
     }
 
 

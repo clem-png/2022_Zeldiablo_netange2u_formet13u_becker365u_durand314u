@@ -45,4 +45,12 @@ public class Amulette implements Entite {
     public int getY() {
         return this.y;
     }
+
+    public boolean isApparue() {
+        return apparue;
+    }
+
+    public void setApparue(boolean apparue) {
+        this.apparue = apparue;
+    }
 }

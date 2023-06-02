@@ -34,6 +34,10 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
+
+    Amulette amulette;
+
+    Entree entree;
     ArrayList<Monstre> monstres;
 
     /**
@@ -50,11 +54,16 @@ public class Labyrinthe {
     public ArrayList<Integer> colVide;
     public ArrayList<Integer> ligVide;
 
+    public ArrayList<Integer> colSecret;
+    public ArrayList<Integer> ligSecret;
+
     int nbCaseVide;
 
     ArrayList<Declencheur> Trigger;
 
     public boolean enAttaque;
+
+    public boolean fini;
 
 
     /**
@@ -108,6 +117,7 @@ public class Labyrinthe {
         this.ligVide = new ArrayList<Integer>();
 
         enAttaque = false;
+        fini = false;
 
 
         int nbLignes, nbColonnes;
@@ -127,6 +137,10 @@ public class Labyrinthe {
         int numeroLigne = 0;
 
         int nbCaseVide = 0;
+
+        int nbCaseSecret = 0;
+
+
 
         // parcours le fichier
         while (ligne != null) {
@@ -148,12 +162,17 @@ public class Labyrinthe {
                     case ';':
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
+                        this.colSecret.add(colonne);
+                        this.ligSecret.add(numeroLigne);
+
+                        nbCaseSecret++;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Perso(colonne, numeroLigne);
+                        this.entree = new Entree(colonne, numeroLigne);
                         break;
                     case MONSTRE:
                         //pas de mur
@@ -184,6 +203,13 @@ public class Labyrinthe {
                     this.portes.get(a).setDeclencheur(d);
                 }
             }
+
+            int var = (int) (Math.random() * nbCaseSecret);
+            this.amulette = new Amulette(this.colSecret.get(var), this.ligSecret.get(var));
+
+
+
+
 
 
 
@@ -334,6 +360,17 @@ public class Labyrinthe {
                     }
                 }
             }
+
+            if (this.amulette.etrePresent(this.pj.x, this.pj.y) && this.amulette.isApparue()){
+                this.pj.setAvoirAmulette(true);
+                System.out.println("amulette active : ");
+            }
+            if (this.entree.etrePresent(this.pj.x, this.pj.y) && this.pj.getAvoirAmulette()) {
+                //this.entree.setActive();
+                System.out.println("entree active : ");
+            }
+
+
         }
     }
 
@@ -368,7 +405,7 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return false;
+        return this.fini;
     }
 
     // ##################################
@@ -404,5 +441,8 @@ public class Labyrinthe {
         // utilise le tableau de boolean
         return this.murs[x][y];
     }
+
+
+
 
 }
