@@ -11,6 +11,8 @@ public class Perso implements Entite {
      */
     int x, y;
 
+    boolean enAttente = false;
+
     /**
      * constructeur
      *
@@ -53,4 +55,14 @@ public class Perso implements Entite {
         //getter
         return this.y;
     }
+
+    public void setEnAttente(boolean b) {
+    	this.enAttente = b;
+    }
+
+    public boolean getEnAttente() {
+    	return this.enAttente;
+    }
+
+
 }
