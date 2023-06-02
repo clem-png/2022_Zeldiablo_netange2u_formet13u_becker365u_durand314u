@@ -20,6 +20,8 @@ public class Amulette implements Entite {
     public Amulette(int x, int y) {
         this.x = x;
         this.y = y;
+        this.apparue = false;
+        this.recup = false;
     }
 
     /**
