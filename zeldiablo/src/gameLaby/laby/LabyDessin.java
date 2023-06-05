@@ -10,6 +10,9 @@ import moteurJeu.Jeu;
 import java.io.File;
 import java.net.MalformedURLException;
 
+/**
+ * Classe LabyDessin
+ */
 public class LabyDessin implements DessinJeu {
 
     private static final int SIZE = 20;
@@ -23,6 +26,9 @@ public class LabyDessin implements DessinJeu {
 
     private Image entree;
 
+    /**
+     * Constructeur LabyDessin qui, permet d'implementer les sprite du jeu
+     */
     public LabyDessin (){
         try {
             String imagePath = "src/gameLaby/Sprite/Link.png";
@@ -65,6 +71,12 @@ public class LabyDessin implements DessinJeu {
         }
     }
 
+    /**
+     * Methode dessinerJeu qui, permet de créer l"interface graphique en fonction du caractère présent
+     * à la position (i, j) du labyrinthe
+     * @param jeu jeu a afficher
+     * @param canvas canvas dans lequel dessiner l'etat du jeu
+     */
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
         LabyJeu laby = (LabyJeu) jeu;
@@ -76,13 +88,13 @@ public class LabyDessin implements DessinJeu {
         gc.setFill(Color.LIGHTGRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-
+        //dessin des murs
         for (int i = 0; i < laby.getLaby().getLength(); i++) {
             for (int j = 0; j < laby.getLaby().getLengthY(); j++) {
                 if (laby.getLaby().getMur(i, j)) {
                     gc.drawImage(this.mur, i * SIZE, j * SIZE, SIZE, SIZE);
 
-
+                //dessin des monstres en fonction des actions réalisées
                 } else if (laby.getLaby().monstres != null) {
                     for (int k = 0; k < laby.getLaby().monstres.size(); k++) {
                         if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
@@ -95,6 +107,7 @@ public class LabyDessin implements DessinJeu {
                         }
                     }
 
+                    //dessin des portes
                     if (laby.getLaby().portes != null) {
                         for (int k = 0; k < laby.getLaby().portes.size(); k++) {
                             if (laby.getLaby().portes.get(k).etrePresent(i, j) && !laby.getLaby().portes.get(k).getDeclencheur().getActive()) {
@@ -102,6 +115,8 @@ public class LabyDessin implements DessinJeu {
                             }
 
                         }
+
+                        //dessin des interrupteurs
                         if (laby.getLaby().Trigger != null) {
                             for (int k = 0; k < laby.getLaby().Trigger.size(); k++) {
                                 if (laby.getLaby().Trigger.get(k).etrePresent(i, j)) {

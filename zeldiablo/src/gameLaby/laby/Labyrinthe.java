@@ -25,7 +25,6 @@ public class Labyrinthe {
     public static final char SECRET = ';';
 
 
-
     /**
      * constantes actions possibles
      */
@@ -123,7 +122,6 @@ public class Labyrinthe {
         enAttaque = false;
 
 
-
         int nbLignes, nbColonnes;
         // lecture nblignes
         nbLignes = Integer.parseInt(bfRead.readLine());
@@ -185,7 +183,7 @@ public class Labyrinthe {
                         //pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         //ajout de la porte
-                        this.portes.add (new Porte(colonne, numeroLigne));
+                        this.portes.add(new Porte(colonne, numeroLigne));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -195,7 +193,7 @@ public class Labyrinthe {
                 this.Trigger = new ArrayList<Declencheur>();
                 for (int a = 0; a < this.portes.size(); a++) {
                     int var = (int) (Math.random() * nbCaseVide);
-                    Declencheur d  = new Declencheur(this.colVide.get(var), this.ligVide.get(var));
+                    Declencheur d = new Declencheur(this.colVide.get(var), this.ligVide.get(var));
                     this.Trigger.add(d);
                     //enleve la case vide de la liste
                     this.colVide.remove(var);
@@ -209,25 +207,20 @@ public class Labyrinthe {
             numeroLigne++;
         }
 
-        if ( nbCaseSecret == 0){
-            System.out.println("pas amulette");
-        }
-        else {
+        if (nbCaseSecret == 0) {
+
+        } else {
             int var = (int) (Math.random() * nbCaseSecret);
             this.amulette = new Amulette(this.colSecret.get(var), this.ligSecret.get(var));
-            System.out.println("amulette en " + this.amulette.x + " " + this.amulette.y);
+
         }
 
-
-
-        System.out.println("nb case vide : " + nbCaseVide);
-        System.out.println("nb case secret : " + nbCaseSecret);
 
         // ferme fichier
         bfRead.close();
     }
 
-    public void deplacerMonstreAll(){
+    public void deplacerMonstreAll() {
         int alea = 0;
         for (int q = 0; q < this.monstres.size(); q++) {
             alea = (int) (Math.random() * 4);
@@ -266,32 +259,29 @@ public class Labyrinthe {
                         }
                     }
                     if (!surMonstre) {
-                        if(this.portes != null){
-                            for(int i = 0; i < this.portes.size(); i++){
-                                if((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())){
+                        if (this.portes != null) {
+                            for (int i = 0; i < this.portes.size(); i++) {
+                                if ((this.portes.get(i).etrePresent(suivante[0], suivante[1])) && (!this.portes.get(i).getDeclencheur().getActive())) {
                                     surPorte = true;
                                 }
                             }
                         }
                         if (!surPorte) {
 
-                            if(this.pj.etrePresent(suivante[0], suivante[1])){
+                            if (this.pj.etrePresent(suivante[0], suivante[1])) {
                                 surPj = true;
                             }
-                            if(!surPj){
+                            if (!surPj) {
                                 this.monstres.get(q).x = suivante[0];
                                 this.monstres.get(q).y = suivante[1];
-                            }
-                            else{
+                            } else {
                                 surPj = false;
                             }
-                        }
-                        else {
+                        } else {
                             // on met a jour personnage
                             surPorte = false;
                         }
-                    }
-                    else {
+                    } else {
                         surMonstre = false;
                     }
                 } else {
@@ -360,25 +350,24 @@ public class Labyrinthe {
                 for (int i = 0; i < this.Trigger.size(); i++) {
                     if (this.Trigger.get(i).etrePresent(this.pj.x, this.pj.y)) {
                         this.Trigger.get(i).setActive();
-                        System.out.println("porte active : " + this.Trigger.get(i).getActive());
+
                     }
                 }
             }
 
-            if (this.amulette.etrePresent(this.pj.x, this.pj.y) && this.amulette.isApparue()){
+            if (this.amulette.etrePresent(this.pj.x, this.pj.y) && this.amulette.isApparue()) {
                 this.pj.setAvoirAmulette(true);
-                this.amulette.setApparue(false);
-                System.out.println("amulette prise");
+
             }
             if (this.entree.etrePresent(this.pj.x, this.pj.y) && this.pj.getAvoirAmulette()) {
                 this.entree.activer();
-                System.out.println("entree prise");
+
 
             }
         }
     }
 
-    public void attaque (){
+    public void attaque() {
         enAttaque = true;
         String[] tab = new String[4];
         tab[0] = HAUT;
@@ -396,7 +385,6 @@ public class Labyrinthe {
                             this.monstres.remove(j);
                             if (this.monstres.size() == 0) {
                                 this.amulette.setApparue(true);
-                                System.out.println("amulette active : " + this.amulette.isApparue());
                             }
                         }
                     }
@@ -416,12 +404,10 @@ public class Labyrinthe {
         if (this.entree != null) {
             if (this.entree.etreActive) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -447,7 +433,6 @@ public class Labyrinthe {
     public int getLength() {
         return murs.length;
     }
-
 
 
     /**
