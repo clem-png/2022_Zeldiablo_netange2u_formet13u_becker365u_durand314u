@@ -371,7 +371,7 @@ public class Labyrinthe {
                 System.out.println("amulette prise");
             }
             if (this.entree.etrePresent(this.pj.x, this.pj.y) && this.pj.getAvoirAmulette()) {
-                //this.entree.setActive();
+                this.entree.activer();
                 System.out.println("entree prise");
 
             }
@@ -413,7 +413,17 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return false;
+        if (this.entree != null) {
+            if (this.entree.etreActive) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 
     // ##################################

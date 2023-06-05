@@ -4,9 +4,12 @@ public class Entree {
 
     private int x, y;
 
+    boolean etreActive;
+
     public Entree(int x, int y) {
         this.x = x;
         this.y = y;
+        this.etreActive = false;
     }
 
     public boolean etrePresent(int dx, int dy) {
@@ -27,6 +30,14 @@ public class Entree {
     public int getY() {
         //getter
         return this.y;
+    }
+
+    public void activer(){
+        this.etreActive = true;
+    }
+
+    public boolean etreActive(){
+        return this.etreActive;
     }
 
 }
