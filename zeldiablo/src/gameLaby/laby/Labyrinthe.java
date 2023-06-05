@@ -22,6 +22,10 @@ public class Labyrinthe {
 
     public static final char PORTE = 'D';
 
+    public static final char SECRET = ';';
+
+
+
     /**
      * constantes actions possibles
      */
@@ -34,10 +38,6 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
-
-    Amulette amulette;
-
-    Entree entree;
     ArrayList<Monstre> monstres;
 
     /**
@@ -63,7 +63,9 @@ public class Labyrinthe {
 
     public boolean enAttaque;
 
-    public boolean fini;
+    Amulette amulette;
+
+    Entree entree;
 
 
     /**
@@ -115,9 +117,11 @@ public class Labyrinthe {
         this.portes = new ArrayList<Porte>();
         this.colVide = new ArrayList<Integer>();
         this.ligVide = new ArrayList<Integer>();
+        this.colSecret = new ArrayList<Integer>();
+        this.ligSecret = new ArrayList<Integer>();
 
         enAttaque = false;
-        fini = false;
+
 
 
         int nbLignes, nbColonnes;
@@ -140,8 +144,6 @@ public class Labyrinthe {
 
         int nbCaseSecret = 0;
 
-
-
         // parcours le fichier
         while (ligne != null) {
 
@@ -159,12 +161,11 @@ public class Labyrinthe {
                         this.ligVide.add(numeroLigne);
                         nbCaseVide++;
                         break;
-                    case ';':
+                    case SECRET:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         this.colSecret.add(colonne);
                         this.ligSecret.add(numeroLigne);
-
                         nbCaseSecret++;
                         break;
                     case PJ:
@@ -203,21 +204,24 @@ public class Labyrinthe {
                     this.portes.get(a).setDeclencheur(d);
                 }
             }
-
-            int var = (int) (Math.random() * nbCaseSecret);
-            this.amulette = new Amulette(this.colSecret.get(var), this.ligSecret.get(var));
-
-
-
-
-
-
-
-
             // lecture
             ligne = bfRead.readLine();
             numeroLigne++;
         }
+
+        if ( nbCaseSecret == 0){
+            System.out.println("pas amulette");
+        }
+        else {
+            int var = (int) (Math.random() * nbCaseSecret);
+            this.amulette = new Amulette(this.colSecret.get(var), this.ligSecret.get(var));
+            System.out.println("amulette en " + this.amulette.x + " " + this.amulette.y);
+        }
+
+
+
+        System.out.println("nb case vide : " + nbCaseVide);
+        System.out.println("nb case secret : " + nbCaseSecret);
 
         // ferme fichier
         bfRead.close();
@@ -363,14 +367,14 @@ public class Labyrinthe {
 
             if (this.amulette.etrePresent(this.pj.x, this.pj.y) && this.amulette.isApparue()){
                 this.pj.setAvoirAmulette(true);
-                System.out.println("amulette active : ");
+                this.amulette.setApparue(false);
+                System.out.println("amulette prise");
             }
             if (this.entree.etrePresent(this.pj.x, this.pj.y) && this.pj.getAvoirAmulette()) {
                 //this.entree.setActive();
-                System.out.println("entree active : ");
+                System.out.println("entree prise");
+
             }
-
-
         }
     }
 
@@ -390,6 +394,10 @@ public class Labyrinthe {
                         this.monstres.get(j).subirAttaque();
                         if (this.monstres.get(j).etreMort() == true) {
                             this.monstres.remove(j);
+                            if (this.monstres.size() == 0) {
+                                this.amulette.setApparue(true);
+                                System.out.println("amulette active : " + this.amulette.isApparue());
+                            }
                         }
                     }
                 }
@@ -405,7 +413,7 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return this.fini;
+        return false;
     }
 
     // ##################################
@@ -430,6 +438,8 @@ public class Labyrinthe {
         return murs.length;
     }
 
+
+
     /**
      * return mur en (i,j)
      *
@@ -441,8 +451,5 @@ public class Labyrinthe {
         // utilise le tableau de boolean
         return this.murs[x][y];
     }
-
-
-
 
 }
