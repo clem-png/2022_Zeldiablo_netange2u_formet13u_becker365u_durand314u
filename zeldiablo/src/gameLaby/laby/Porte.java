@@ -1,21 +1,11 @@
 package gameLaby.laby;
 
-public class Porte {
-     int x , y ;
+public class Porte extends Entite{
      private Declencheur declencheur;
 
      public Porte(int x , int y ){
-          this.x = x ;
-          this.y = y ;
+          super(x,y);
           this.declencheur = null ;
-     }
-
-     public boolean etrePresent(int x , int y ){
-          boolean b = false;
-          if (this.x ==x && this.y == y ) {
-               b = true;
-          }
-          return b ;
      }
 
      public Declencheur getDeclencheur(){

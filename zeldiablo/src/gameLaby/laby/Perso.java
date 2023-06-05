@@ -4,12 +4,12 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Perso implements Entite {
+public class Perso extends Entite {
 
     /**
      * position du personnage
      */
-    int x, y;
+
 
     boolean avoirAmulette = false;
 
@@ -22,8 +22,7 @@ public class Perso implements Entite {
      * @param dy position selon y
      */
     public Perso(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        super(dx, dy);
     }
 
     /**

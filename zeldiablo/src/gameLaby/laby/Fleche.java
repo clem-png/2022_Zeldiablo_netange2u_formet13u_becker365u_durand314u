@@ -1,12 +1,10 @@
 package gameLaby.laby;
 
-public class Fleche {
+public class Fleche extends Entite {
 
     /**
      * position du personnage
      */
-    int x, y;
-
     boolean detruit;
 
 
@@ -17,26 +15,8 @@ public class Fleche {
      * @param dy position selon y
      */
     public Fleche(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        super(dx, dy);
         this.detruit = false;
-    }
-
-
-    /**
-     * @return position x de la fleche
-     */
-    public int getX() {
-        // getter
-        return this.x;
-    }
-
-    /**
-     * @return position y de la fleche
-     */
-    public int getY() {
-        //getter
-        return this.y;
     }
 
     public boolean etreDetruit(){

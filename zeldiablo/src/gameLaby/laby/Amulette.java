@@ -3,13 +3,11 @@ package gameLaby.laby;
 /**
  * Gère une amulette située en x, y
  */
-public class Amulette implements Entite {
+public class Amulette extends Entite {
 
     boolean apparue;
 
     boolean recup;
-
-    int x, y;
 
     /**
      * Constructeur de l'amulette
@@ -18,32 +16,9 @@ public class Amulette implements Entite {
      * @param y coordonné y de l'amulette
      */
     public Amulette(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.apparue = false;
         this.recup = false;
-    }
-
-    /**
-     * permet de savoir si l'amulette est en x,y
-     *
-     * @param dx position selon x
-     * @param dy position selon y
-     * @return
-     */
-    @Override
-    public boolean etrePresent(int dx, int dy) {
-        return (this.x == dx && this.y == dy);
-    }
-
-    @Override
-    public int getX() {
-        return this.x;
-    }
-
-    @Override
-    public int getY() {
-        return this.y;
     }
 
     public boolean isApparue() {

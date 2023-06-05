@@ -1,14 +1,45 @@
 package gameLaby.laby;
 
-public interface Entite {
+public class Entite {
+
+    int x, y;
+
+
     /**
      * constructeur
      *
      * @param dx position selon x
      * @param dy position selon y
      */
-    public boolean etrePresent(int dx, int dy);
+    public Entite(int dx, int dy) {
+        this.x = dx;
+        this.y = dy;
 
-    public int getX();
-    public int getY();
+    }
+
+    public boolean etrePresent(int dx, int dy) {
+
+        return (this.x == dx && this.y == dy);
+    }
+
+    // ############################################
+    // GETTER
+    // ############################################
+
+    /**
+     * @return position x du personnage
+     */
+    public int getX() {
+        // getter
+        return this.x;
+    }
+
+    /**
+     * @return position y du personnage
+     */
+    public int getY() {
+        //getter
+        return this.y;
+    }
+
 }
