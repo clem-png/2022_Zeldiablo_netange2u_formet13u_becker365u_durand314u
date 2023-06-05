@@ -1,5 +1,6 @@
 package gameLaby.laby;
 
+import com.sun.javafx.application.PlatformImpl;
 import moteurJeu.MoteurJeu;
 
 
@@ -9,7 +10,7 @@ public class MainLaby {
         int height = 600;
         int pFPS = 10;
 
-
+        PlatformImpl.startup(() -> {});
         LabyJeu labyjeu = new LabyJeu(args[0]);
         LabyDessin labydessin = new LabyDessin();
 

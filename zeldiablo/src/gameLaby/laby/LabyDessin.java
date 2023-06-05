@@ -2,13 +2,68 @@ package gameLaby.laby;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 public class LabyDessin implements DessinJeu {
 
     private static final int SIZE = 20;
+
+    private Image perso;
+    private Image mur;
+    private Image monstre;
+    private Image monstreAttaquer;
+    private Image amulette;
+    private Image interrupteur;
+
+    private Image entree;
+
+    public LabyDessin (){
+        try {
+            String imagePath = "src/gameLaby/Sprite/Link.png";
+            File file = new File(imagePath);
+            String imageUrl = file.toURI().toURL().toString();
+            this.perso = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/mur.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.mur = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/interrupteur.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.interrupteur = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/sanic.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.monstre = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/sanicAttaquer.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.monstreAttaquer = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/amulette.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.amulette = new Image(imageUrl);
+
+            imagePath = "src/gameLaby/Sprite/entree.png";
+            file = new File(imagePath);
+            imageUrl = file.toURI().toURL().toString();
+            this.entree = new Image(imageUrl);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
@@ -25,19 +80,17 @@ public class LabyDessin implements DessinJeu {
         for (int i = 0; i < laby.getLaby().getLength(); i++) {
             for (int j = 0; j < laby.getLaby().getLengthY(); j++) {
                 if (laby.getLaby().getMur(i, j)) {
-                    gc.setFill(Color.BLACK);
-                    gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
+                    gc.drawImage(this.mur, i * SIZE, j * SIZE, SIZE, SIZE);
+
 
                 } else if (laby.getLaby().monstres != null) {
                     for (int k = 0; k < laby.getLaby().monstres.size(); k++) {
                         if (laby.getLaby().monstres.get(k).etrePresent(i, j)) {
                             if (laby.getLaby().monstres.get(k).subirattaque) {
-                                gc.setFill(Color.BLUE);
-                                gc.fillOval(i * SIZE, j * SIZE, SIZE, SIZE);
+                                gc.drawImage(this.monstreAttaquer, i * SIZE, j * SIZE, SIZE, SIZE);
                                 laby.getLaby().monstres.get(k).subirattaque = false;
                             } else {
-                                gc.setFill(Color.GREEN);
-                                gc.fillOval(i * SIZE, j * SIZE, SIZE, SIZE);
+                                gc.drawImage(this.monstre, i * SIZE, j * SIZE, SIZE, SIZE);
                             }
                         }
                     }
@@ -45,25 +98,29 @@ public class LabyDessin implements DessinJeu {
                     if (laby.getLaby().portes != null) {
                         for (int k = 0; k < laby.getLaby().portes.size(); k++) {
                             if (laby.getLaby().portes.get(k).etrePresent(i, j) && !laby.getLaby().portes.get(k).getDeclencheur().getActive()) {
-                                gc.setFill(Color.BLACK);
-                                gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
+                                gc.drawImage(this.mur, i * SIZE, j * SIZE, SIZE, SIZE);
                             }
 
                         }
                         if (laby.getLaby().Trigger != null) {
                             for (int k = 0; k < laby.getLaby().Trigger.size(); k++) {
                                 if (laby.getLaby().Trigger.get(k).etrePresent(i, j)) {
-                                    gc.setFill(Color.YELLOW);
-                                    gc.fillRect(i * SIZE, j * SIZE, SIZE, SIZE);
+                                    gc.drawImage(this.interrupteur, i * SIZE, j * SIZE, SIZE, SIZE);
                                 }
                             }
+                        }
+                        if (laby.getLaby().amulette != null){
+                            if (laby.getLaby().amulette.etrePresent(i , j) && laby.getLaby().amulette.apparue ) {
+                                    gc.drawImage(this.amulette, i * SIZE, j * SIZE, SIZE, SIZE);
+                                }
                         }
                     }
                 }
 
-                // Dessin du joueur
-                gc.setFill(Color.RED);
-                gc.fillOval(laby.getLaby().pj.x * SIZE, laby.getLaby().pj.y * SIZE, SIZE, SIZE);
+
+                gc.drawImage(this.entree, laby.getLaby().entree.getX() * SIZE, laby.getLaby().entree.getY() * SIZE, SIZE, SIZE);
+                // Dessin du joueur avec une image
+                gc.drawImage(this.perso, laby.getLaby().pj.x * SIZE, laby.getLaby().pj.y * SIZE, SIZE, SIZE);
             }
         }
     }
