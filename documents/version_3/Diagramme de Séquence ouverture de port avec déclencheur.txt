@@ -1,15 +1,21 @@
 @startuml
 
-participant "Po : Porte" as PO
-participant "Declenche : Declencheur" as D
-participant "Pers : Perso" as P
+participant "m : main" as m
+participant "LabyJ : LabyJeu" as lj
+participant "L : Laby" as l
+participant "d : Declencheur" as d
+participant "LabyD : LabyDessin" as ld
 
-PO -> D : "ouvrir()"
-D -> P: "etrePresent()"
-P --> D : "true"
-D --> PO : "true"
-PO -> PO : "ouvert"
-PO --> PO : "true"
+create l
+m -> l : new
+lj -> l : deplacerPerso(action)
+alt si active = true
+l -> d : porte ouverte
+d --> l
+end
+l --> lj
+l -> ld : dessinerJeu(jeu, canvas)
+ld --> l
 
 
 

@@ -1,0 +1,32 @@
+@startuml
+
+participant "m : main" as m
+participant "LabyJ : LabyJeu" as lj
+participant "L : Laby" as l
+participant "LabyD : LabyDessin" as ld
+participant "a : Amulette" as a
+participant "e : Entree" as e
+
+create l
+m -> l : new
+lj -> l : attaque()
+lj --> l
+alt si plus de monstre
+l -> ld : dessinerJeu()
+ld --> l
+end
+lj --> l : déplacerPerso()
+l -> ld : etrePresent()
+ld --> l
+l -> e : etrePresent()
+e --> l
+l --> lj
+alt si perso sur entree avec amulette
+lj -> l : etreFini()
+l --> lj
+end
+
+
+
+
+@enduml

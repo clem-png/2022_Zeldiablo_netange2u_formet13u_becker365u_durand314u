@@ -1,24 +1,26 @@
 @startuml
 
+participant "m : main" as m
+participant "LabyJ : LabyJeu" as lj
 participant "c : Clavier" as c
-participant "Laby : Labyrinthe" as l
-participant "M : Monstre" as m
-participant "Pers : Perso" as p
-participant "labyD : LabyDessin" as ld
+participant "L : Laby" as l
+participant "M : Monstre" as M
+participant "LabyD : LabyDessin" as ld
 
-c -> l : "appuyerTouche()"
-l --> c
-l -> m : "attaque()"
-m -> p : "etrePresent()"
-p --> m : "true"
-m -> ld : "subirAttaque()"
-ld -> ld : "changement de couleur"
-ld --> ld
-ld --> m 
-m -> m : "etreMort()"
-m --> m : "true"
-m --> l : "removeMonstre"
-
+create l
+m -> l : new
+lj -> c : appuyerTouche("espace")
+c --> lj
+lj -> l : attaque()
+l -> M : subirAttaque()
+M -> ld : dessinerJeu()
+ld --> M
+M --> l
+alt si pv = 0
+l -> M : etreMort()
+M --> l : true
+end
+l --> lj
 
 
 
