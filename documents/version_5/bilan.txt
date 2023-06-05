@@ -1,0 +1,27 @@
+Pour cette partie nous avons choisit comme fonctionnalité : 
+-Le rajout d'un amulette qui apparait une fois tous les monstres tués pour pouvoir terminer le jeu, 
+-L'ajout de sprite pour rendre le jeu plus beau, 
+-Tire à distance (pas eu le temps de le coder)
+
+Pour la répartition du travail : 
+
+Quentin : 
+-Classe flèche
+-Modification du clavier pour ajouter une touche de tire à distance
+-Digramme de classes/séquence
+
+-Doryann : 
+-Modification de labyDessin, LabyJeu, 
+-Ajout des sprites
+
+-Romain : 
+-Classe amulette, entree
+-Bilan
+
+-Clement : 
+-Modification de labyrinthe 
+
+
+Nous n'avons pas pus coder le tire à distance que nuos avions prévu par manque de temps. 
+
+Dans cette itération, l'ajout des sprites à été le pus compliquer notament à comprendre comment cella marchait mais nous avons réussit
