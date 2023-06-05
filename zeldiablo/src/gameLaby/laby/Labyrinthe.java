@@ -357,7 +357,7 @@ public class Labyrinthe {
 
             if (this.amulette.etrePresent(this.pj.x, this.pj.y) && this.amulette.isApparue()) {
                 this.pj.setAvoirAmulette(true);
-
+                this.amulette.setApparue(false);
             }
             if (this.entree.etrePresent(this.pj.x, this.pj.y) && this.pj.getAvoirAmulette()) {
                 this.entree.activer();
